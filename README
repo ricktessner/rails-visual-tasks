@@ -1,0 +1,33 @@
+Visualization of Rails bits
+===========================
+
+I find myself writing little rake tasks to visualize various aspects of a rails
+application.  These make use of graphviz, http://graphviz.org , to generate the
+pngs.
+
+I work also exclusively on linux boxes, so these tasks may not work on other
+OSes.
+
+aasmviz.rake
+============
+
+This generates a png of a state machine defined by AASM
+(git://github.com/rubyist/aasm.git).  Start and End states are shown in a
+double circle and the event edges are labelled with the event name.
+
+To use: rake aasm:visual
+
+  1. Check out this project
+  2. copy lib/tasks/aasmviz.rake to your RAILS_ROOT/lib/tasks directory.
+  3. rake aasm:visual # from your RAILS_ROOT directory
+
+This will generate a list of pngs called /tmp/aasm_model_name.png.  Only models
+that inherit directly from ActiveRecord::Base will be examined.  In other
+words, any tableless or STI models will not have png's generated for any AASM
+they may define.
+
+Still to do
+
+1. incorporate guard definitions
+2. incorporate success definitions
+3. Look in places other than app/models/*.rb for potential model definitions.
